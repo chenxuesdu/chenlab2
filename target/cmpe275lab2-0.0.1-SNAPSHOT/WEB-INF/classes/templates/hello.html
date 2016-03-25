@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<p th:text="'Hello, ' + ${firstname} + '!' " />
+	<form:form>
+		<table>
+			<tr>
+				<td>First Name:</td>
+				<td><form:input path="firstName" /></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><form:input path="lastName" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Save Changes" /></td>
+			</tr>
+		</table>
+	</form:form>
+	<form:form action="create" method="post" commandName="profileForm">
+			<table border="0">
+				<tr>
+					<td colspan="2" align="center"><h2>Profile</h2></td>
+				</tr>
+				<tr>
+					<td>id:</td>
+					<td><form:input path="id" /></td>
+				</tr>
+				<tr>
+					<td>First Name:</td>
+					<td><form:input path="firstname" /></td>
+				</tr>
+				<tr>
+					<td>Last Name:</td>
+					<td><form:password path="lastname" /></td>
+				</tr>
+				<tr>
+					<td>E-mail:</td>
+					<td><form:input path="email" /></td>
+				</tr>
+				<tr>
+					<td>Address:</td>
+					<td><form:input path="address" /></td>
+				</tr>
+				<tr>
+					<td>organization:</td>
+					<td><form:input path="organization"/></td>
+				</tr>
+				<tr>
+					<td>aboutMyself:</td>
+					<td><form:input path="aboutMyself"/></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="left"><input type="submit"
+						value="Update" /></td>
+						<td colspan="2" align="right"><input type="submit"
+						value="Delete" /></td>
+				</tr>
+			</table>
+		</form:form>
+</body>
+</html>

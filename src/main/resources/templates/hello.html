@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<pre>
+<p th:text =" 'UserId: ' + ${profile.id}"/>
+<p th:text = "'FirstName: ' + ${profile.firstname}"/>
+<p th:text = "'LastName: ' + ${profile.lastname}"/>
+<p th:text = "'Email:' +  ${profile.email}"/>
+<p th:text = "'address: ' + ${profile.address}"/>
+<p th:text = "'organization: ' + ${profile.organization}"/>
+<p th:text = "'aboutMyself: ' + ${profile.aboutMyself}"/>
+
+
+</pre>
+	
+	
+	
+	
+	
+	<form action="#" th:action="@{/profile}" th:object="${profile}" method="post">
+    	<p>Id: <input type="text" th:field="*{id}" readonly="readonly"/></p>
+        <p>First Name: <input type="text" th:field="*{firstname}" /></p>
+        <p>Last Name: <input type="text" th:field="*{lastname}" /></p>
+        <p>Email: <input type="text" th:field="*{email}" /></p>
+        <p>address: <input type="text" th:field="*{address}" /></p>
+        <p>organization: <input type="text" th:field="*{organization}" /></p>
+        <p>About Myself: <input type="text" th:field="*{aboutMyself}" /></p>
+        <p><input type="Update" value="Delete" /> <input type="reset" value="Reset" /></p>
+    </form>
+	
+	
+	
+	<form:form action="create" method="post" commandName="profileForm">
+		<table border="0">
+			<tr>
+				<td colspan="2" align="center"><h2>Profile</h2></td>
+			</tr>
+			<tr>
+				<td>id:</td>
+				<td><form:input path="id" /></td>
+			</tr>
+			<tr>
+				<td>First Name:</td>
+				<td><form:input path="firstname" /></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><form:password path="lastname" /></td>
+			</tr>
+			<tr>
+				<td>E-mail:</td>
+				<td><form:input path="email" /></td>
+			</tr>
+			<tr>
+				<td>Address:</td>
+				<td><form:input path="address" /></td>
+			</tr>
+			<tr>
+				<td>organization:</td>
+				<td><form:input path="organization" /></td>
+			</tr>
+			<tr>
+				<td>aboutMyself:</td>
+				<td><form:input path="aboutMyself" /></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="left"><input type="submit"
+					value="Update" /></td>
+				<td colspan="2" align="right"><input type="submit"
+					value="Delete" /></td>
+			</tr>
+		</table>
+	</form:form>
+</body>
+</html>
