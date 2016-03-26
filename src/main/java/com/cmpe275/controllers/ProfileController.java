@@ -5,6 +5,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,7 +64,15 @@ public class ProfileController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	// @ResponseBody
 	public String create(Model model) {
+		model.addAttribute("profile", new Profile());
 		return "create";
+	}
+	@RequestMapping(value = "/profile", method = RequestMethod.POST)
+	// @ResponseBody
+	public String createSuccess(@ModelAttribute Profile profile,Model model) {
+		model.addAttribute("profile", profile);
+		this.profileDao.save(profile);
+		return "form";
 	}
 
 	@RequestMapping("/delete")

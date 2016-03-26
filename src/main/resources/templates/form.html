@@ -6,6 +6,7 @@
 <title>Profile Form Format</title>
 </head>
 <body>
+<p> Update or Delete Profile</p>
 	<form action="#" th:action="@{/profile}" th:object="${profile}" method="post">
     	<p>Id: <input type="text" th:field="*{id}" readonly="readonly"/></p>
         <p>First Name: <input type="text" th:field="*{firstname}" /></p>
