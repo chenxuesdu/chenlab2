@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Profile Plain Format</title>
+</head>
+<body>
+
+
+
+
+
+	<pre>
+<p th:text=" 'UserId: ' + ${profile.id}" />
+<p th:text="'FirstName: ' + ${profile.firstname}" />
+<p th:text="'LastName: ' + ${profile.lastname}" />
+<p th:text="'Email:' +  ${profile.email}" />
+<p th:text="'address: ' + ${profile.address}" />
+<p th:text="'organization: ' + ${profile.organization}" />
+<p th:text="'aboutMyself: ' + ${profile.aboutMyself}" />
+
+
+</pre>
+</body>
+</html>

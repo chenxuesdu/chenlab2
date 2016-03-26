@@ -1,5 +1,7 @@
 package com.cmpe275.controllers;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,17 +29,14 @@ public class ProfileController {
 	}
 	
 	@RequestMapping("/profile/{id}")
-	public String getProfile(@PathVariable(value = "id") String id,
+	public String getProfile(@PathVariable(value = "id") String id, @PathParam(value = "brief") boolean brief,
 			Model model) {
 		try {
 			Profile profile = profileDao.findById(id);
-//			model.addAttribute("firstname", profile.getFirstname());
-//			model.addAttribute("lastname", profile.getLastname());
-//			model.addAttribute("email", profile.getEmail());
-//			model.addAttribute("address", profile.getAddress());
-//			model.addAttribute("organization", profile.getOrganization());
-//			model.addAttribute("aboutMyself", profile.getAboutMyself());
 			model.addAttribute("profile", profile);
+			if (brief) {
+				return "plain";
+			}
 			return "hello";
 		}catch (Exception e) {
 			return "Error creating the profile";

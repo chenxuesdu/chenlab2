@@ -13,6 +13,7 @@ public class Profile {
 	private String id;
 	@NotNull
 	private String firstname;
+	@NotNull
 	private String lastname;
 	private String email;
 	private String address;
