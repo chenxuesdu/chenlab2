@@ -21,57 +21,84 @@ public class ProfileController {
 	@Autowired
 	ProfileDao profileDao;
 
-	// question 5
-	@RequestMapping("/profile/delete/{id}")
-	public String deleteProfile(@PathVariable(value = "id") String id,
-			Model model) {
-		try {
-			Profile profile = profileDao.findById(id);
-			if (profile == null) {
-				throw new ResourceNotFoundException(
-						"Sorry, the requested user with id" + id
-								+ "does not exits!");
-			}
-			this.profileDao.delete(profile);
-			model.addAttribute("profile", new Profile());
-			return "redirect:/profile";
-		} catch (Exception e) {
-			throw new ResourceNotFoundException("Profile not found!");
-		}
-	}
-
-	// question 1 updte
-	@RequestMapping(value = "/profile/update")
-	public String UpdateProfile(@ModelAttribute Profile profile, Model model) {
-		model.addAttribute("profile", profile);
-		try {
-			this.profileDao.save(profile);
-			model.addAttribute("profile", profile);
-			return "form";
-		} catch (Exception e) {
-			throw new ResourceNotFoundException("Profile not found!");
-		}
-	}
+	// // question 1 updte
+	// @RequestMapping(value = "/profile/update")
+	// public String UpdateProfile(@ModelAttribute Profile profile, Model model)
+	// {
+	// model.addAttribute("profile", profile);
+	// try {
+	// this.profileDao.save(profile);
+	// model.addAttribute("profile", profile);
+	// return "form";
+	// } catch (Exception e) {
+	// throw new ResourceNotFoundException("Profile not found!");
+	// }
+	// }
 
 	// question 1 and 2
-	@RequestMapping("/profile/{id}")
+	@RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
 	public String getProfile(@PathVariable(value = "id") String id,
 			@PathParam(value = "brief") boolean brief, Model model) {
+
+		Profile profile = profileDao.findById(id);
+		if (profile == null) {
+			throw new ResourceNotFoundException(
+					"Sorry, the requested user with id" + id
+							+ " does not exits!");
+		}
+		model.addAttribute("profile", profile);
+		if (brief) {
+			return "plain";
+		}
+		return "form";
+
+	}
+
+	// question 4
+	@RequestMapping(value = "/profile/{id}", method = RequestMethod.POST)
+	public String createOrUpdateProfile(@PathVariable(value = "id") String id,
+			@PathParam(value = "firstname") String firstname,
+			@PathParam(value = "lastname") String lastname,
+			@PathParam(value = "email") String email,
+			@PathParam(value = "address") String address,
+			@PathParam(value = "organization") String organization,
+			@PathParam(value = "aboutmyself") String aboutmyself, Model model) {
 		try {
 			Profile profile = profileDao.findById(id);
 			if (profile == null) {
-				throw new ResourceNotFoundException(
-						"Sorry, the requested user with id" + id
-								+ "does not exits!");
+				profile = new Profile();
+				profile.setId(id);
 			}
+			profile.setFirstname(firstname);
+			profile.setLastname(lastname);
+			profile.setEmail(email);
+			profile.setAddress(address);
+			profile.setOrganization(organization);
+			profile.setAboutMyself(aboutmyself);
 			model.addAttribute("profile", profile);
-			if (brief) {
-				return "plain";
-			}
-			return "form";
+			this.profileDao.save(profile);
+
 		} catch (Exception e) {
-			throw new ResourceNotFoundException("Profile not found!");
+			e.printStackTrace();
 		}
+		return "redirect:/profile/{id}?brief=false";
+	}
+
+	// question 5
+	@RequestMapping(value = "/profile/{id}", method = RequestMethod.DELETE)
+	public String deleteProfile(@PathVariable(value = "id") String id,
+			Model model) {
+
+		Profile profile = profileDao.findById(id);
+		if (profile == null) {
+			throw new ResourceNotFoundException(
+					"Sorry, the requested user with id" + id
+							+ "does not exits!");
+		}
+		this.profileDao.delete(profile);
+		model.addAttribute("profile", new Profile());
+		// return "redirect:/profile";
+		return "create";
 	}
 
 	// question 3
@@ -106,7 +133,7 @@ public class ProfileController {
 			}
 			this.profileDao.save(profile);
 			model.addAttribute("profile", profile);
-			return "redirect:/profile/"+ profile.getId();
+			return "redirect:/profile/" + profile.getId();
 		}
 		if (action.equals("create")) {
 			model.addAttribute("profile", profile);
