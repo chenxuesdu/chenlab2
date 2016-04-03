@@ -3,10 +3,19 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Create Profile</title>
+<title>Group 8: Create Profile</title>
 </head>
 <body>
-	 <form action="#"  method="post">
+<script>
+function validateForm() {
+    var x = document.forms["createForm"]["id"].value;
+    if (x == null || x =="") {
+    	 alert("id must be filled out");
+         return false;
+    }
+}
+</script>
+	<!--  <form action="#"  method="post">
     	<p>Id: <input type="text"/></p>
         <p>First Name: <input type="text" /></p>
         <p>Last Name: <input type="text"  /></p>
@@ -15,16 +24,17 @@
         <p>organization: <input type="text"  /></p>
         <p>About Myself: <input type="text" /></p>
         <p><input type="submit" value="Create" /></p>
-    </form> 
-   <!--  <form action="#" th:action="@{/profile}" th:object="${profile}" method="post">
-    	<p>Id: <input type="text" th:field="*{id}" readonly="readonly"/></p>
+    </form>  -->
+    <p>Create Profile</p>
+   <form name="createForm" action="#" th:action="@{/profile}" th:object="${profile}" method="post" onsubmit="return validateForm()">
+    	<p>Id: <input type="text" th:field="*{id}"/></p>
         <p>First Name: <input type="text" th:field="*{firstname}" /></p>
         <p>Last Name: <input type="text" th:field="*{lastname}" /></p>
-        <p>Email: <input type="text" th:field="*{email}" /></p>
+        <p>Email: <input name="email" type="text" th:field="*{email}" /></p>
         <p>address: <input type="text" th:field="*{address}" /></p>
         <p>organization: <input type="text" th:field="*{organization}" /></p>
         <p>About Myself: <input type="text" th:field="*{aboutMyself}" /></p>
-        <p><input type="submit" value="Delete" /> <input type="submit" value="Update" /></p>
-    </form> -->
+        <p><button type="submit" name="action" value="create">Create</button></p>
+    </form>
 </body>
 </html>

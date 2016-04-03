@@ -21,20 +21,6 @@ public class ProfileController {
 	@Autowired
 	ProfileDao profileDao;
 
-	// // question 1 updte
-	// @RequestMapping(value = "/profile/update")
-	// public String UpdateProfile(@ModelAttribute Profile profile, Model model)
-	// {
-	// model.addAttribute("profile", profile);
-	// try {
-	// this.profileDao.save(profile);
-	// model.addAttribute("profile", profile);
-	// return "form";
-	// } catch (Exception e) {
-	// throw new ResourceNotFoundException("Profile not found!");
-	// }
-	// }
-
 	// question 1 and 2
 	@RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
 	public String getProfile(@PathVariable(value = "id") String id,
