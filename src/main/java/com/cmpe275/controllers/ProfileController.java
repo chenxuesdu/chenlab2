@@ -20,8 +20,23 @@ public class ProfileController {
 
 	@Autowired
 	ProfileDao profileDao;
+	
+	public ProfileDao getProfileDao() {
+		return profileDao;
+	}
 
-	// question 1 and 2
+	public void setProfileDao(ProfileDao profileDao) {
+		this.profileDao = profileDao;
+	}
+	
+	/**
+	 *  Implement the method to find user profile.
+	 *  1. If userId is available, retrieve user's profile.
+	 *  2. If the profile of the given user ID does not exist, a customized 404 HTML page with the message “Sorry, the requested user with ID XXX does not exist.” Note: XXX is the ID specified in the request.
+	 *  3. If brief=true This returns an HTML that encapsulates the given user’s full profile in plain text format
+	 *  @param id
+	 *  @return String
+	 */
 	@RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
 	public String getProfile(@PathVariable(value = "id") String id,
 			@PathParam(value = "brief") boolean brief, Model model) {
@@ -40,7 +55,11 @@ public class ProfileController {
 
 	}
 
-	// question 4
+	/**
+	 *  Implement the method to create or update user profile.
+	 *  @param id
+	 *  @return String
+	 */
 	@RequestMapping(value = "/profile/{id}", method = RequestMethod.POST)
 	public String createOrUpdateProfile(@PathVariable(value = "id") String id,
 			@PathParam(value = "firstname") String firstname,
@@ -70,7 +89,13 @@ public class ProfileController {
 		return "redirect:/profile/{id}?brief=false";
 	}
 
-	// question 5
+	/**
+	 *  Implement the method to delete user profile for the given userID.
+	 *  1. If the profile does not exist, it should return the same 404 page
+	 *  2. If the profile exists, delete the corresponding profile, and redirect the request to the profile creation page
+	 *  @param id
+	 *  @return String
+	 */
 	@RequestMapping(value = "/profile/{id}", method = RequestMethod.DELETE)
 	public String deleteProfile(@PathVariable(value = "id") String id,
 			Model model) {
@@ -87,14 +112,23 @@ public class ProfileController {
 		return "create";
 	}
 
-	// question 3
+	/**
+	 *  Implement the method to create user profile.
+	 *  @param Model
+	 *  @return String
+	 */
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String create(Model model) {
 		model.addAttribute("profile", new Profile());
 		return "create";
 	}
 
-	// question 3
+	/**
+	 *  Implement the method to create user profile.
+	 *  All fields including the ID will be created.
+	 *  @param Profile
+	 *  @return String
+	 */
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String createSuccess(@ModelAttribute Profile profile,
 			@RequestParam(value = "action", required = true) String action,

@@ -22,7 +22,12 @@ public class Profile {
 
 	public Profile() {
 	}
-
+	
+	public Profile(String id, String firstname) {
+		this.id = id;
+		this.firstname = firstname;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -78,5 +83,6 @@ public class Profile {
 	public void setAboutMyself(String aboutMyself) {
 		this.aboutmyself = aboutMyself;
 	}
+	
 
 }
